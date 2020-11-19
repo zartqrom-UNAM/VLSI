@@ -1,0 +1,32 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+ENTITY bcd7seg IS
+PORT(	
+	bcd 		: IN std_logic_vector(3 DOWNTO 0);
+	led1, led2 	: OUT std_logic_vector(6 DOWNTO 0)
+);
+END bcd7seg;
+ARCHITECTURE arqbcd7seg OF bcd7seg IS
+	signal led : std_logic_vector(13 downto 0);
+BEGIN
+	WITH bcd SELECT
+	led <=	"10000001000000" WHEN "0000",
+			"10000001111001" WHEN "0001",
+			"10000000100100" WHEN "0010",
+			"10000000110000" WHEN "0011",
+			"10000000011001" WHEN "0100",
+			"10000000010010" WHEN "0101",
+			"10000000000010" WHEN "0110",
+			"10000001111000" WHEN "0111",
+			"10000000000000" WHEN "1000",
+			"10000000011000" WHEN "1001",
+			"11110011000000" WHEN "1010",--10
+			"11110011111001" WHEN "1011",--11
+			"11110010100100" WHEN "1100",
+			"11110010110000" WHEN "1101",
+			"11110010011001" WHEN "1110",
+			"11110010010010" WHEN "1111",--15
+			"01111110111111" WHEN OTHERS;
+	led1 <= led(6 downto 0);
+	led2 <= led(13 downto 7);
+END arqbcd7seg;

@@ -1,0 +1,7 @@
+|mux2x1
+a => sal.DATAB
+b => sal.DATAA
+sel => sal.OUTPUTSELECT
+sal << sal.DB_MAX_OUTPUT_PORT_TYPE
+
+

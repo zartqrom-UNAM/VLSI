@@ -1,0 +1,37 @@
+|ram
+addrWr[0] => addressWrite[0].DATAIN
+addrWr[1] => addressWrite[1].DATAIN
+addrRd[0] => addressRead[0].DATAIN
+addrRd[1] => addressRead[1].DATAIN
+clkWr => memory~5.CLK
+clkWr => memory~0.CLK
+clkWr => memory~1.CLK
+clkWr => memory~2.CLK
+clkWr => memory~3.CLK
+clkWr => memory~4.CLK
+clkWr => addressWrite[0].CLK
+clkWr => addressWrite[1].CLK
+clkWr => dataInBuf[0].CLK
+clkWr => dataInBuf[1].CLK
+clkWr => dataInBuf[2].CLK
+clkWr => memory.CLK0
+clkRd => dataOut[0]~reg0.CLK
+clkRd => dataOut[1]~reg0.CLK
+clkRd => dataOut[2]~reg0.CLK
+clkRd => addressRead[0].CLK
+clkRd => addressRead[1].CLK
+wrEn => memory~5.DATAIN
+wrEn => addressWrite[0].ENA
+wrEn => addressWrite[1].ENA
+wrEn => dataInBuf[0].ENA
+wrEn => dataInBuf[1].ENA
+wrEn => dataInBuf[2].ENA
+wrEn => memory.WE
+dataIn[0] => dataInBuf[0].DATAIN
+dataIn[1] => dataInBuf[1].DATAIN
+dataIn[2] => dataInBuf[2].DATAIN
+dataOut[0] <= dataOut[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+dataOut[1] <= dataOut[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+dataOut[2] <= dataOut[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,41 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity ram is
+port (
+    addrWr      : in std_logic_vector(1 downto 0);  --Direccion de escritura
+    addrRd      : in std_logic_vector(1 downto 0);  --Direccion de lectura
+    clkWr       : in std_logic;
+    clkRd       : in std_logic;
+    wrEn        : in std_logic;
+    dataIn      : in std_logic_vector(2 downto 0);  --Registro de entrada
+    dataOut     : out std_logic_vector(2 downto 0) --Registro de salida
+);
+end entity ram;
+
+architecture arqram of ram is
+    type matrix is array (0 to 3) of std_logic_vector(2 downto 0);
+    signal memory       : matrix;
+    signal dataInBuf    : std_logic_vector(2 downto 0);
+    signal addressWrite : std_logic_vector(1 downto 0);
+    signal addressRead  : std_logic_vector(1 downto 0);
+begin
+    --Acceso de escritura
+    writeAccess : process(clkWr)
+    begin
+        if clkWr'event and clkWr = '1' and wrEn = '1' then
+            dataInBuf                                   <= dataIn;
+            addressWrite                                <= addrWr;
+            memory(to_integer(unsigned(addressWrite)))  <= dataInBuf;
+        end if;
+    end process writeAccess;
+    --Acceso de lectura
+    readAcces: process(clkRd)
+    begin
+        if clkRd'event and clkRd = '1' then
+            addressRead     <= addrRd;
+            dataOut         <= memory(to_integer(Unsigned(addressRead)));
+        end if;
+    end process readAcces;
+end architecture arqram;

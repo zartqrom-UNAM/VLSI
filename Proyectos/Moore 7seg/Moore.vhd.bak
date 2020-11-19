@@ -1,0 +1,24 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Moore is
+port (
+    clk, reset  : in std_logic;
+    led1, led2  : out std_logic_vector(6 downto 0)
+);
+end entity Moore;
+
+architecture arqMoore of Moore is
+    signal clkL         : std_logic;
+    signal clkConta     : std_logic;
+    signal bcd1, bcd2   : std_logic_vector(3 downto 0);
+    signal salMoore     : std_logic_vector(3 downto 0);
+    
+begin
+    u1 : entity work.relojlento(arqrelojlento) port map (clk, clkL);
+    u2 : entity work.estados(arqestados) port map (clkL, reset, salMoore);
+    u3 : entity work.cuenta(arqcuenta) port map (clkL,salMoore, clkConta, bcd1);
+    u4 : entity work.cuentaS(arqcuentaS) port map (clkConta, cout, bdc2);
+    u5 : entity work.bcd7seg(arqbcd7seg) port map (bcd1, led1);
+    u6 : entity work.bcd7seg(arqbcd7seg) port map (bcd2, led2);
+end architecture arqMoore;

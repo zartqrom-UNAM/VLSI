@@ -1,0 +1,30 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity cuenta is
+    port ( 
+        entrada : in std_logic_vector(3 downto 0);
+		cout    : out std_logic_vector(3 downto 0);
+        salida  : out  STD_LOGIC_vector(3 downto 0)
+    );
+end cuenta;
+
+architecture arqcuenta of cuenta is
+begin
+    process (entrada)
+    variable cuenta: std_logic_vector (3 downto 0):= "0000";
+    begin
+        if entrada = "1001" then
+            cuenta:= "0000";
+            cout <= "0001";
+        elsif entrada = "1111" then
+            cout <= "0000"
+        else
+            cuenta := cuenta + 1;
+        end if;
+        SALIDA <= cuenta;
+    end process;
+end arqcuenta;
